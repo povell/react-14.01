@@ -1,5 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Message = ({name, content}) => <div><strong>{name? name + ":" : ""}</strong> {content}</div>;
-
-export { Message };
+export default class Message extends Component {
+    render() {
+        const {name, content} = this.props;
+        return <div><strong>{name? name + ":" : ""}</strong> {content}</div>;
+    }
+}
