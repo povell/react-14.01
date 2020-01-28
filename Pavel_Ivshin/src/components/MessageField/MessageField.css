@@ -1,0 +1,6 @@
+.MessageField {
+    background-color: lightgray;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
