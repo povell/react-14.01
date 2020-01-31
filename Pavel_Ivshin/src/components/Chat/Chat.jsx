@@ -7,17 +7,19 @@ import './Chat.css';
 
 /**
  * Компонент по отрисовке чата
+ * @param {number} chatId Ид выбранного чата
  * @param {array} messages Массив пересланных сообщений
  * @param {Function} onSendMessage Обработчик отправки нового сообщения
  */
 
-export const Chat = ({messages, onSendMessage}) =>
+export const Chat = ({chatId, messages, onSendMessage}) =>
     (<div className="Chat">
         <MessageField messages={messages}/>
-        <ChatForm onSendMessage={onSendMessage}/>
+        <ChatForm chatId={chatId} onSendMessage={onSendMessage}/>
     </div>);
 
 Chat.propTypes = {
+    chatId: PropTypes.number,
     messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes)),
     onSendMessage: PropTypes.func.isRequired
 }

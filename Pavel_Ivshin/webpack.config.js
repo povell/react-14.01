@@ -39,4 +39,8 @@ module.exports = {
         modules: [`${__dirname}/static_src`, 'node_modules'],
         extensions: ['.js', '.jsx'],
      },
+     devServer: {
+         historyApiFallback: true
+     },
+     devtool: 'inline-source-map'
 }

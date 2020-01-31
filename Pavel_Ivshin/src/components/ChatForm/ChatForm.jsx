@@ -5,8 +5,6 @@ import TextField from '@material-ui/core/TextField';
 
 /**
  * Компонент по отрисовке поля с формой отправки нового сообщения
- * @param {string} message Текст сообщения
- * @param {string} name Имя отправителя
  * @param {Function} onSendMessage Обработчик отправки новго сообщения
  */
 
@@ -15,16 +13,17 @@ export class ChatForm extends React.Component {
         name: 'User',
         content: 'My message'
     }
-//    textarea = React.createRef();
+
     componentDidMount() {
-//        console.log(this.textarea.current.focus());
     }
+
     handleInput = ({currentTarget: {value, name}}) => {
         this.setState(() => ({[name]: value}))
     }
     handleClick = () => {
         const {name, content} = this.state;
-        this.props.onSendMessage({name, content});
+        const id = this.props.chatId;
+        this.props.onSendMessage({name, content}, id);
         this.setState(() => ({name: 'User', content: 'My message'}));
     }
     handleKeyUp = (e) => {
