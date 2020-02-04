@@ -4,18 +4,23 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 /**
  * Компонент по отрисовке хедера
- * @param {string} name Название выбранного чата
+ * @param {string} name Имя юзера
  */
 
-export const Header = ({name}) => {
+export const Header = (props) => {
     return (<div className='Header'>
-        {name}
-        <Link to={"/profile/"}>
-            Профиль
-        </Link>
+        <div className="Header--layout">
+            <Link to={"/chats/"}>
+                Чаты
+            </Link>
+            <Link to={"/profile/"}>
+                Профайл
+            </Link>
+        </div>
+        <span>Имя пользователя: </span><span>{props.name}</span>
     </div>);
 }
 
 Header.propTypes = {
-    name: PropTypes.string
+    name: PropTypes.string,
 }

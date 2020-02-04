@@ -22,8 +22,7 @@ export class ChatForm extends React.Component {
     }
     handleClick = () => {
         const {name, content} = this.state;
-        const id = this.props.chatId;
-        this.props.onSendMessage({name, content}, id);
+        this.props.onSendMessage({name, content});
         this.setState(() => ({name: 'User', content: 'My message'}));
     }
     handleKeyUp = (e) => {
@@ -51,26 +50,6 @@ export class ChatForm extends React.Component {
         </div>);
     }
 }
-
-// export const ChatForm = ({onSendMessage}) => {
-//     const [name, setName] = useState('User');
-//     const [content, setContent] = useState('My message');
-//     const textarea = useRef();
-
-//     useEffect(() => {
-//         textarea.current.focus();
-//     }, [])
-
-//     const handleClick = () => {
-//         onSendMessage({name, content});
-//     }
-
-//     return (<div>
-//         <input value={name} onChange={({currentTarget: {value}}) => setName(value)} type="text" />
-//         <textarea value={content} onChange={({currentTarget: {value}}) => setContent(value)} ref={textarea}/>
-//         <button onClick={handleClick}>Отправить</button>
-//     </div>);
-// }
 
 ChatForm.propTypes = {
     onSendMessage: PropTypes.func.isRequired

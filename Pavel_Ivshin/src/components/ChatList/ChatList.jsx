@@ -8,10 +8,10 @@ import './ChatList.css';
 /**
  * Компонент по отрисовке списка чатов
  * @param {object} chats Объект с чатами
- * @param {Function} handleAddChat Обработчик добавления нового чата в список
+ * @param {Function} onAddChat Обработчик добавления нового чата в список
 */
 
-export const ChatList = ({chats, handleAddChat}) =>{
+export const ChatList = ({chats, chatsCount, onAddChat}) =>{
     const chatElements = Object.keys(chats).map(id => (
         <Link key={id} to={"/chats/"+id}>
             <ListItem>{chats[id].name}</ListItem>
@@ -21,12 +21,12 @@ export const ChatList = ({chats, handleAddChat}) =>{
         <List className='ChatList'>
             { chatElements }
         </List>
-            <ChatListForm handleAddChat={handleAddChat}/>
+            <ChatListForm onAddChat={onAddChat}/>
         </div>
     )
 }
 
 ChatList.propTypes = {
     chats: PropTypes.object,
-    handleAddChat: PropTypes.func.isRequired
+    onAddChat: PropTypes.func.isRequired
 }
