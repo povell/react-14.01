@@ -1,54 +1,49 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Layout} from '../Layout/Layout';
-import PropTypes from 'prop-types';
+import HeaderContainer from '../../containers/HeaderContainer';
+import ProfileContainer from '../../containers/ProfileContainer';
+import {ConnectedRouter} from 'connected-react-router';
+import {history} from '../../store/store';
 
 /**
  * Компонент роутер
- * @param {object} chats Объект с чатами
- * @param {Function} onSendMessage Обработчик отправки новго сообщения
- * @param {Function} handleAddChat Обработчик добавления нового чата в список
 */
 
-export const Router = ({chats, handleSendMessage, handleAddChat}) => {
+export const Router = () => {
     return(
-        <BrowserRouter>
+        <ConnectedRouter history={history}>
             <Switch>
-                <Route path="/chats/" exact render={(props) => (
-                        <Layout 
-                            id={+props.match.params.id}
-                            chats={chats}
-                            handleSendMessage={handleSendMessage}
-                            handleAddChat={handleAddChat}/>
-                )}/>
-                <Route path="/chats/:id" exact render={(props) => (
-                        <Layout 
-                            id={+props.match.params.id}
-                            chats={chats}
-                            handleSendMessage={handleSendMessage}
-                            handleAddChat={handleAddChat}/>
-                )}/>
-                <Route path="/about">
-                    It's about
-                </Route>
-                <Route path="/home">
-                    It's home
-                </Route>
-                <Route path="/profile">
+                <Route path='/chats/' exact render={(props) => (
                     <div>
-                        <h1>Profile</h1>
+                        <HeaderContainer />
+                        <Layout 
+                            id={props.match.params.id}/>
+                    </div>
+                )}/>
+                <Route path='/chats/:id' exact render={(props) => (
+                    <div>
+                        <HeaderContainer />
+                        <Layout 
+                            id={props.match.params.id}/>
+                    </div>
+                )}/>
+                <Route path='/about'>
+                    It&apos;s about
+                </Route>
+                <Route path='/home'>
+                    It&apos;s home
+                </Route>
+                <Route path='/profile'>
+                    <div>
+                        <HeaderContainer />
+                        <ProfileContainer />
                     </div>
                 </Route>
-                <Route path="/">
-                    It's 404
+                <Route path='/'>
+                    It&apos;s 404
                 </Route>
             </Switch>
-        </BrowserRouter>
+        </ConnectedRouter>
     );
-}
-
-Router.propTypes = {
-    chats: PropTypes.object,
-    handleSendMessage: PropTypes.func.isRequired,
-    handleAddChat: PropTypes.func.isRequired
-}
+};
