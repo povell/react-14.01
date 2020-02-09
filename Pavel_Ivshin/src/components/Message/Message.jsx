@@ -24,12 +24,14 @@ const useStyles = makeStyles(theme => ({
 export const Message = ({name, content}) => {
     const classes = useStyles();
     const classNames = classnames('Message', {'Message--robot': name === 'Robot'});
-    return (<div className={classNames}>
+    return (
+        <div className={classNames}>
             <strong>{name}:</strong>{content}
             <IconButton aria-label="delete" className={classes.margin}>
                 <DeleteIcon fontSize="small" />
             </IconButton>
-    </div>);
+        </div>
+    );
 };
 
 Message.propTypes = {

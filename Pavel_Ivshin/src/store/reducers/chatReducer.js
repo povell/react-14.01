@@ -1,5 +1,5 @@
 import {handleActions} from 'redux-actions';
-import {loadChats, addMessage, addChat, deleteChat} from '../actions/chatAction';
+import {loadChats, addMessage, addChat, deleteChat, fire, unfire} from '../actions/chatAction';
 
 const defaultState = {
     chats: {}
@@ -12,6 +12,7 @@ export default handleActions({
             chats: {
                 1: {
                     name: 'Chat1',
+                    unread: false,
                     messages: [
                         {name: 'Ivan', content: 'Hello! It\'s chat one!'},
                         {name: 'Ivan', content: 'How are you?'},
@@ -19,14 +20,15 @@ export default handleActions({
                 },
                 2: {
                     name: 'Chat2',
+                    unread: false,
                     messages: [
                         {name: 'Den', content: 'Hi from chat 2'},
                     ],
                 },
                 3: {
                     name: 'Chat3',
-                    messages: [
-                    ],
+                    unread: false,
+                    messages: [],
                 },
             }
         };
@@ -59,13 +61,38 @@ export default handleActions({
         };
     },
     [deleteChat]: (state, {payload: {id}}) => {
-        let newChats = {...state.chats};
+        const newChats = {...state.chats};
         delete newChats[id];
         return {
             ...state,
-            chats: {
-                newChats,
-            }
+            chats: newChats,
         }
-    }
+    },
+    [fire]: (state, {payload: {id}}) => {
+        return {
+            ...state,
+            chats: {
+                ...state.chats,
+                [id]: {
+                    name: state.chats[id].name,
+                    messages: state.chats[id].messages,
+                    unread: true,
+                }
+            }
+        };
+    },
+    [unfire]: (state, {payload: {id}}) => {
+        if(!state.chats[id]) return state;
+        return {
+            ...state,
+            chats: {
+                ...state.chats,
+                [id]: {
+                    name: state.chats[id].name,
+                    messages: state.chats[id].messages,
+                    unread: false,
+                }
+            }
+        };
+    },
 }, defaultState);
