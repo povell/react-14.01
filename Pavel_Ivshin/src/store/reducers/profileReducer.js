@@ -1,17 +1,24 @@
 import {handleActions} from 'redux-actions';
-import {loadUser, changeName} from '../actions/profileAction';
+import {changeName, userRequest, userSuccess} from '../actions/profileAction';
 
 const defaultState = {
-    user: {}
+    name: "",
+    isLoading: false,
 };
 
 export default handleActions({
-    [loadUser]: (state) => {
-        return {
+    [userRequest]: (state) => {
+        return  {
             ...state,
-            user: {
-                name: 'User',
-            }
+            isLoading: true,
+        };
+    },
+    [userSuccess]: (state, {payload}) => {
+        console.log("PAY LOAD " + payload.name);
+        return  {
+            ...state,
+            isLoading: false,
+            name: payload.name,
         };
     },
     [changeName]: (state, {payload: {name}}) => {
