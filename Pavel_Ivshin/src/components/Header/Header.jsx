@@ -10,17 +10,17 @@ import PropTypes from 'prop-types';
 export const Header = (props) => {
     return (<div className='Header'>
         <div className="Header--layout">
-            <Link to={"/chats/"}>
+            <Link to={'/chats/'}>
                 Чаты
             </Link>
-            <Link to={"/profile/"}>
+            <Link to={'/profile/'}>
                 Профайл
             </Link>
         </div>
         <span>Имя пользователя: </span><span>{props.name}</span>
     </div>);
-}
+};
 
 Header.propTypes = {
     name: PropTypes.string,
-}
+};

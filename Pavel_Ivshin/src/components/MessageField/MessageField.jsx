@@ -14,4 +14,4 @@ export const MessageField = ({messages}) =>
 
 MessageField.propTypes = {
     messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes))
-}
+};

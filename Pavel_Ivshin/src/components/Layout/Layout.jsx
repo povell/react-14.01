@@ -6,7 +6,7 @@ import './Layout.css';
 
 /**
  * Компонент по позиционированию ChatList и Chat
- * @param {number} id Ид из url
+ * @param {string} id Ид из url
 */
 
 export const Layout = ({id}) => {
@@ -16,8 +16,8 @@ export const Layout = ({id}) => {
             <ChatContainer id={id}/>
         </main>
     </div>);
-}
+};
 
 Layout.propTypes = {
-    id: PropTypes.number,
-}
+    id: PropTypes.string,
+};

@@ -2,8 +2,11 @@
     background-color: lightskyblue;
     border-radius: 5px;
     padding: 4px;
-    width: 30%;
+    width: 50%;
     align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .Message--robot {

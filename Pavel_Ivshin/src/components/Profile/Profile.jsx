@@ -14,8 +14,8 @@ export const Profile = (props) => {
             <span>Профиль</span>
         </div>
     );
-}
+};
 
 Profile.propTypes = {
     name: PropTypes.string,
-}
+};

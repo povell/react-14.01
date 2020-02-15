@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 
 /**
  * Компонент по отрисовке формы добавления нового чата
- * @param {Function} onAddChat Обработчик добавления нового чата в список
+ * @param {Function} addChat Обработчик добавления нового чата в список
 */
 
 export class ChatListForm extends Component {
@@ -18,7 +18,7 @@ export class ChatListForm extends Component {
     }
     handleClick = () => {
         const {name} = this.state;
-        this.props.onAddChat(name);
+        this.props.addChat(name);
         this.setState(() => ({name: 'Chat name'}));
     }
     handleKeyUp = (e) => {
@@ -40,5 +40,5 @@ export class ChatListForm extends Component {
 }
 
 ChatListForm.propTypes = {
-    onAddChat: PropTypes.func.isRequired
+    addChat: PropTypes.func.isRequired
 }

@@ -18,11 +18,11 @@ export const Chat = ({messages, onSendMessage}) => {
             <ChatForm onSendMessage={onSendMessage}/>
         </div>);
     }else{
-        return <span>Вы не выбрали чат</span>
+        return <span>Вы не выбрали чат</span>;
     }
-}
+};
 
 Chat.propTypes = {
     messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes)),
     onSendMessage: PropTypes.func.isRequired
-}
+};

@@ -1,29 +1,34 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ChatList} from '../components/ChatList/ChatList';
-import {addChat} from '../store/actions/chatAction';
+import {addChat, deleteChat} from '../store/actions/chatAction';
 
 
-const mapStateToProps = ({chatReducer}, ownProps) => {
+const mapStateToProps = (store) => {
+    const chats = Object.keys(store.chatReducer.chats).map((id) => ({
+        id,
+        name: store.chatReducer.chats[id].name,
+        unread: store.chatReducer.chats[id].unread
+    }))
     return {
-        chats: chatReducer.chats,
-        chatsCount: Object.keys(chatReducer.chats).length,
+        chats
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-      addChat
+        addChat,
+        deleteChat,
     }, dispatch);
-}
+};
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const cid = stateProps.chatsCount + 1;
-    return {
-        ...stateProps,
-        onAddChat: (name) => {
-            dispatchProps.addChat(cid, name)},
-    }
-}
+// const mergeProps = (stateProps, dispatchProps, ownProps) => {
+//     const id = ownProps.id;
+//     return {
+//         ...stateProps,
+//         ...dispatchProps,
+//         deleteChat: () => dispatchProps.deleteChat(id),
+//     };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatList);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatList);

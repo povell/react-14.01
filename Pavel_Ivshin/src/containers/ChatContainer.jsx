@@ -48,21 +48,21 @@ const mapStateToProps = ({chatReducer}, ownProps) => {
     const id = ownProps.id;
     return {
         messages: id ? chatReducer.chats[id] ? chatReducer.chats[id].messages : null : null,
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-      addMessage
+        addMessage
     }, dispatch);
-}
+};
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const id = ownProps.id;
     return {
         ...stateProps,
         onSendMessage:  ({name, content}) => dispatchProps.addMessage(id, name, content),
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Chat);
