@@ -9,6 +9,8 @@ import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import {createBrowserHistory} from 'history';
 import {routerMiddleware, connectRouter} from 'connected-react-router';
+import {apiMiddleware} from 'redux-api-middleware';
+import thunk from 'redux-thunk';
 
 const persistConfig = {
     key: 'geekmessanger',
@@ -30,7 +32,7 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_E
 
 export const initStore = (preloadedState = {}) => {
     const store = createStore(
-        persistReducer(persistConfig, reducer), preloadedState, compose(applyMiddleware(routerMiddleware(history), logger, chatMiddleware, botMiddleware), devTools)
+        persistReducer(persistConfig, reducer), preloadedState, compose(applyMiddleware(routerMiddleware(history), logger, chatMiddleware, botMiddleware, apiMiddleware, thunk), devTools)
     )
     const persistor = persistStore(store);
 

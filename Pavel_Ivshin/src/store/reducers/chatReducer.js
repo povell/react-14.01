@@ -1,36 +1,24 @@
 import {handleActions} from 'redux-actions';
-import {loadChats, addMessage, addChat, deleteChat, fire, unfire} from '../actions/chatAction';
+import {addMessage, addChat, deleteChat, fire, unfire, chatsRequest, chatsSuccess} from '../actions/chatAction';
 
 const defaultState = {
-    chats: {}
+    chats: {},
+    isLoading: false,
 };
 
 export default handleActions({
-    [loadChats]: (state) => {
+    [chatsRequest]: (state) => {
         return  {
             ...state,
-            chats: {
-                1: {
-                    name: 'Chat1',
-                    unread: false,
-                    messages: [
-                        {name: 'Ivan', content: 'Hello! It\'s chat one!'},
-                        {name: 'Ivan', content: 'How are you?'},
-                    ],
-                },
-                2: {
-                    name: 'Chat2',
-                    unread: false,
-                    messages: [
-                        {name: 'Den', content: 'Hi from chat 2'},
-                    ],
-                },
-                3: {
-                    name: 'Chat3',
-                    unread: false,
-                    messages: [],
-                },
-            }
+            isLoading: true,
+        };
+    },
+    [chatsSuccess]: (state, {payload}) => {
+        console.log("PAY LOAD " + payload);
+        return  {
+            ...state,
+            isLoading: false,
+            chats: payload,
         };
     },
     [addMessage]: (state, {payload: {id, name, content}}) => {
